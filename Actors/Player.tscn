@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://wizzard_m_idle_anim_f0.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/MyHurtBox.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 18.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 18.9976
+height = 18.0047
+
+[node name="player" type="KinematicBody2D" groups=["player"]]
+position = Vector2( 95, 325 )
+rotation = 0.000295996
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+
+[node name="WizzardMIdleAnimF0" type="Sprite" parent="CollisionShape2D"]
+position = Vector2( -2.5, -14.5 )
+scale = Vector2( 2.6875, 2.89286 )
+texture = ExtResource( 1 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="MyHurtBox" type="Area2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MyHurtBox"]
+position = Vector2( 0.000595093, 2 )
+shape = SubResource( 2 )
+
+[node name="takeDamage" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
