@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://wizzard_m_idle_anim_f0.png" type="Texture" id=1]
+[ext_resource path="res://Assets/sprites/Tech Dungeon Roguelite - Asset Pack (DEMO)/Players/players blue x1.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/MyHurtBox.gd" type="Script" id=3]
+[ext_resource path="res://Audio/player hurt.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/player bg.wav" type="AudioStream" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.0
@@ -11,25 +13,78 @@ radius = 18.0
 radius = 18.9976
 height = 18.0047
 
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("playerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 8.535, 107.682, 16, 20 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("playerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 7, 16, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "run"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("playerSprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 8.535, 107.682, 16, 20 ), Rect2( 41, 109, 16, 20 ), Rect2( 72, 108, 16, 21 ), Rect2( 103, 108, 16, 20 ) ]
+}
+
 [node name="player" type="KinematicBody2D" groups=["player"]]
 position = Vector2( 95, 325 )
 rotation = 0.000295996
+collision_mask = 270
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 1 )
-
-[node name="WizzardMIdleAnimF0" type="Sprite" parent="CollisionShape2D"]
-position = Vector2( -2.5, -14.5 )
+[node name="playerSprite" type="Sprite" parent="."]
+position = Vector2( -3.00385, -12.9991 )
 scale = Vector2( 2.6875, 2.89286 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 8.535, 107.682, 16, 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
 
 [node name="MyHurtBox" type="Area2D" parent="."]
+visible = false
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MyHurtBox"]
@@ -39,3 +94,15 @@ shape = SubResource( 2 )
 [node name="takeDamage" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/run = SubResource( 5 )
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -4.37
+
+[node name="bg" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
