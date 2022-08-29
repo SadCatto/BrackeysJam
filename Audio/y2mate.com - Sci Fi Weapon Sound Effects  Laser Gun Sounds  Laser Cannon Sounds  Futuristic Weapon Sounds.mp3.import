@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/y2mate.com - Sci Fi Weapon Sound Effects  Laser Gun Sounds  Laser Cannon Sounds  Futuristic Weapon Sounds.mp3-2ac6b678639295143ae5dd4a913d3c31.mp3str"
+
+[deps]
+
+source_file="res://Audio/y2mate.com - Sci Fi Weapon Sound Effects  Laser Gun Sounds  Laser Cannon Sounds  Futuristic Weapon Sounds.mp3"
+dest_files=[ "res://.import/y2mate.com - Sci Fi Weapon Sound Effects  Laser Gun Sounds  Laser Cannon Sounds  Futuristic Weapon Sounds.mp3-2ac6b678639295143ae5dd4a913d3c31.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
